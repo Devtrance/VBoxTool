@@ -1,0 +1,37 @@
+#!/bin/bash
+
+VERSION="0.1"
+
+MACHINE="$2"
+
+# Little validation
+
+if ([ "$1" == "start" ] || [ "$1" == "stop" ] || [ "$1" == "status" ] && [ -z "$MACHINE" ]); then
+	echo -e "What machine I should ${1}?"
+	exit
+fi
+
+if [ "$1" == "--help" ]; then
+    echo -e "VBoxTool $VERSION"
+	echo -e "Author: Dev_NIX (Pablo Largo) <devnix.code@gmail.com>"
+	echo -e "-----------------------------------------------------\n"
+	echo -e "List of availaible commands:"
+	echo -e "    VBoxTool start <machine name>"
+	echo -e "        Will launch on the background the VM between the quotes"
+	echo -e "    VBoxTool stop <machine name>"
+	echo -e "        Will stop the VM between the quotes"
+	echo -e "    VBoxTool status <machine name>"
+	echo -e "        Show the current status of the machine"
+	echo -e "    VBoxTool list"
+	echo -e "        Output the list of machines installed"
+elif [ "$1" == "start" ]; then
+    VBoxManage startvm "$MACHINE" --type headless
+elif [ "$1" == "stop" ]; then
+    VBoxManage controlvm "$MACHINE" poweroff;
+elif [ "$1" == "status" ]; then
+    VBoxManage showvminfo "$MACHINE" | grep State
+elif [ "$1" == list ]; then
+    VBoxManage list vms
+else
+    echo "Bad arguments. Type VBoxTool --help for a list of commands."
+fi
