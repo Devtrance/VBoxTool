@@ -13,7 +13,7 @@ fi
 
 if [ "$1" == "--help" ]; then
     echo -e "VBoxTool $VERSION"
-	echo -e "Author: Dev_NIX (Pablo Largo) <devnix.code@gmail.com>"
+	echo -e "Author: Dev_NIX <devnix.code@gmail.com>"
 	echo -e "-----------------------------------------------------\n"
 	echo -e "List of availaible commands:"
 	echo -e "    VBoxTool start <machine name>"
